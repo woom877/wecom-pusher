@@ -1,22 +1,15 @@
 import requests
 import json
+import pusher
 
 # Read webhook URL from file
 with open("webhook.txt", "r") as file:
     url = file.read().strip()
 
-headers = {
-    "Content-Type": "application/json"
-}
+# message to send
+message = "test file read"
 
-data = {
-    "msgtype": "text",
-    "text": {
-        "content": "test file read"
-    }
-}
-
-response = requests.post(url, headers=headers, data=json.dumps(data))
+response = pusher.push_message(url, message)
 
 print(response.status_code)
 print(response.text)
