@@ -2,9 +2,13 @@ import requests
 import json
 import pusher
 
-# Read webhook URL from file
+# read webhook URL from file
 with open("webhook.txt", "r") as file:
     url = file.read().strip()
+
+# read the every line of rss.txt
+with open("rss.txt", "r") as file:
+    rss = file.readlines()
 
 # message to send
 message = "test file read"
