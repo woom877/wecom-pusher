@@ -1,17 +1,24 @@
-import requests
 import json
 import pusher
+import processor
 
-# read webhook URL from file
-with open("webhook.txt", "r") as file:
-    url = file.read().strip()
+# load config from file
+config_path = "config.json"
+with open(config_path, "r") as f:
+    config = json.load(f)
 
-# read the every line of rss.txt
-with open("rss.txt", "r") as file:
-    rss = file.readlines()
+print("Loaded config:", config)
 
-# message to send
-message = "test file read"
+# load config of OpenAI client
+completion = processor.load_config(
+    api_key=config["openai"]["api_key"],
+    base_url=config["openai"]["base_url"],
+    model=config["openai"]["model"]
+)
+
+# load webhook URL and get completion message
+url = config["webhook"]
+message = processor.get_completion(completion)
 
 response = pusher.push_message(url, message)
 

@@ -1,17 +1,15 @@
 {
-  "openai": {
-    "api_key": "",
-    "base_url": "",
-    "model": ""
-  },
-  "wechat": {
-    "webhook": ""
-  },
-  "crawler": {
-    "flag": 1,
-    "sources": [
-      "https://www.freebuf.com/feed"
-    ],
-    "update_interval_hours": 24
-  }
+    "openai": {
+        "api_key": "",
+        "base_url": "",
+        "model": ""
+    },
+    "webhook": "",
+    "crawler": {
+        "flag": 1,
+        "sources": [
+        "https://www.freebuf.com/feed"
+        ],
+        "update_interval_hours": 24
+    }
 }
