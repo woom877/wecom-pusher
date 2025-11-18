@@ -1,2 +1,5 @@
+# .vscode
+.vscode/
+
 # private webhook
 webhook.txt
