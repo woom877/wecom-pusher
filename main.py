@@ -7,7 +7,8 @@ config_path = "config.json"
 with open(config_path, "r") as f:
     config = json.load(f)
 
-print("Loaded config:", config)
+url = config["webhook"]
+sources = config["crawler"]["sources"]
 
 # load config of OpenAI client
 completion = processor.load_config(
@@ -16,10 +17,9 @@ completion = processor.load_config(
     model=config["openai"]["model"]
 )
 
-# load webhook URL and get completion message
-url = config["webhook"]
 message = processor.get_completion(completion)
 
+# push message to WeCom
 response = pusher.push_message(url, message)
 
 print(response.status_code)

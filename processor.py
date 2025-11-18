@@ -5,6 +5,7 @@ def load_config(api_key, base_url, model):
         api_key=api_key,
         base_url=base_url,
     )
+    
     completion = client.chat.completions.create(
         model=model,
         messages=[
