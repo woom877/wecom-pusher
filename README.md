@@ -1,1 +1,1 @@
-- 自行创建 webhook.txt 文件用于读入 webhook
+先安装 requirements.txt 中所需的 python 库，然后复制一份 config.examle.json 为 config.json，并填写好所需的内容，运行 main.py 即可。
