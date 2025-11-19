@@ -1,4 +1,6 @@
 import json
+from datetime import datetime, timedelta
+from dateutil import parser, tz
 import pusher
 import processor
 import crawler
@@ -19,13 +21,16 @@ for source in sources:
     feed = crawler.fetch_rss_feed(source)
     for entry in feed.entries:
         title = entry.title
-        time = entry.published
+        time = parser.parse(entry.published).astimezone(tz.gettz("Asia/Shanghai"))
         link = entry.link
         summary = entry.summary
-
-        content = f"标题: {title}\n发布时间: {time}\n链接: {link}\n摘要: {summary}\n\n"
         
-        message += content
+        content = f"标题: {title}\n发布时间: {time}\n链接: {link}\n摘要: {summary}\n\n"
+
+        # check if the time is within the last 24 hours
+        if time >= datetime.now(tz=tz.gettz("Asia/Shanghai")) - timedelta(days=1):
+            message += content
+
 # load config of OpenAI client
 client = processor.load_config(
     api_key=api_key,
