@@ -1,5 +1,8 @@
 # .vscode
 .vscode/
 
+# __pycache__
+__pycache__/
+
 # private config
 config.json
