@@ -19,10 +19,11 @@ for source in sources:
     feed = crawler.fetch_rss_feed(source)
     for entry in feed.entries:
         title = entry.title
+        time = entry.published
         link = entry.link
         summary = entry.summary
 
-        content = f"标题: {title}\n链接: {link}\n摘要: {summary}\n\n"
+        content = f"标题: {title}\n发布时间: {time}\n链接: {link}\n摘要: {summary}\n\n"
         
         message += content
 # load config of OpenAI client
