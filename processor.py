@@ -1,21 +1,19 @@
 from openai import OpenAI
 
-def load_config(api_key, base_url, model):
+def load_config(api_key, base_url):
     client = OpenAI(
         api_key=api_key,
-        base_url=base_url,
+        base_url=base_url
     )
-    
+
+    return client
+
+def get_completion(client, model, message):
     completion = client.chat.completions.create(
         model=model,
         messages=[
-            {"role": "system", "content": "你是 Kimi，由 Moonshot AI 提供的人工智能助手，你更擅长中文和英文的对话。你会为用户提供安全，有帮助，准确的回答。同时，你会拒绝一切涉及恐怖主义，种族歧视，黄色暴力等问题的回答。Moonshot AI 为专有名词，不可翻译成其他语言。"},
-            {"role": "user", "content": "你好，我叫李雷，1+1等于多少？"}
-        ],
-        temperature=0.6,
+            {"role": "system", "content": "你是一个网络安全专家，精通信息安全领域的最新动态。请根据用户提供的内容，生成简洁明了的摘要，突出关键信息和重要细节。"},
+            {"role": "user", "content": f"这是我收集到的最新网络安全资讯，请帮我整理和筛选这其中最有用最重要的安全相关的咨询，按照威胁等级排序，并且去重，最后按照整齐一致的格式输出，并在每条消息后面附上相应的链接，格式按照“总结+文章标题+文章发表时间+文章链接”，只要最近的一天之内的：\n\n{message}"}
+        ]
     )
-    
-    return completion
-
-def get_completion(completion):
     return completion.choices[0].message.content
